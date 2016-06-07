@@ -19,9 +19,7 @@ block content
       fd.append( 'file', $('#fileAdd')[0].files[0] );
 
       $.ajax({
-        /*url: 'https://fcc-file-metadata-nr.herokuapp.com/fileanalyse/',*/
-        url: 'http://localhost:3000/fileanalyse/',
-        type: 'POST',
+        url: 'https://fcc-file-metadata-nr.herokuapp.com/fileanalyse/',
         data: fd,
         processData: false,
         contentType: false,
