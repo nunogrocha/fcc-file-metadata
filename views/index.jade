@@ -8,6 +8,30 @@ block content
     li When I submit something, I will receive the file size in bytes within the JSON response.
 
   h2 Submit
-    form
-      input(type='file',name='file')
-      input(type='submit')
+    form(id='form')
+      input(type='file',name='file',id='fileAdd')
+      input(type='submit',value='Submit File')
+      
+  script.
+    $('#form').on('submit', function(e) {
+      
+      var fd = new FormData();
+      fd.append( 'file', $('#fileAdd')[0].files[0] );
+
+      $.ajax({
+        /*url: 'https://fcc-file-metadata-nr.herokuapp.com/fileanalyse/',*/
+        url: 'http://localhost:3000/fileanalyse/',
+        type: 'POST',
+        data: fd,
+        processData: false,
+        contentType: false,
+        error: function(err) {
+          alert('ERROR: ' + err);
+        },
+        success: function(data) {
+          alert('FILE SIZE: ' + data.size);
+        }
+      });
+      
+      e.preventDefault();
+    });
